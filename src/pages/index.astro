@@ -101,7 +101,10 @@ const groessen = [
           Wir begleiten Sie zum Arzt, helfen im Haushalt, putzen und machen den Garten.
         </p>
         <div class="einstieg__handeln">
-          <Kontaktwege />
+          <a class="knopf knopf--haupt" href={p('/kontakt/') + '#wege'}>
+            Kontakt aufnehmen
+            <Symbol name="pfeil" />
+          </a>
         </div>
       </div>
 
@@ -251,7 +254,10 @@ const groessen = [
               Wie die Abrechnung bei Ihnen am einfachsten läuft, besprechen wir gern persönlich mit Ihnen.
               Was über den Entlastungsbetrag hinausgeht, klären wir immer vorher.
             </p>
-            <Ansprechpartner hell />
+            <a class="knopf knopf--hell" href={p('/kontakt/') + '#wege'}>
+              Kontakt aufnehmen
+              <Symbol name="pfeil" />
+            </a>
           </div>
           <div class="kasse__liste" data-einblenden="2">
             <p class="kasse__ueber">Mit Pflegegrad abrechenbar</p>

@@ -23,8 +23,8 @@ const { fragen, titel = 'Gut zu wissen', klasse } = Astro.props;
     <div class="fragen__kopf" data-einblenden>
       <p class="etikett">Häufige Fragen</p>
       <h2 id="fragen-titel">{titel}</h2>
-      <p class="fragen__hinweis">Noch eine Frage? Rufen Sie uns gern an.</p>
-      <Ansprechpartner />
+      <p class="fragen__hinweis">Noch eine Frage? Melden Sie sich gern bei uns.</p>
+      <a class="weiter" href={p('/kontakt/') + '#wege'}><span>Zur Kontaktseite</span> <Symbol name="pfeil" /></a>
     </div>
     <div class="fragen__liste" data-einblenden="2">
       {fragen.map((f) => (
