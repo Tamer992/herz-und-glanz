@@ -1,7 +1,11 @@
 ---
 import Textseite from '../components/Textseite.astro';
 import { site } from '../site.config';
-// Solange hier Platzhalter stehen, nicht in Suchmaschinen aufnehmen
+// Rechtstexte bleiben aus den Suchmaschinen heraus (indexieren={false}).
+// Der Text beschreibt, was die Seite technisch wirklich tut (Stand 11.10.2026): keine Cookies, kein Speicher im
+// Browser, keine Analyse, keine Schriften oder Skripte von fremden Servern, kein Formular, keine Karte.
+// Wenn sich daran etwas ändert (Formular, Karte, Statistik, Bewertungen von Google), muss dieser Text mit.
+const r = site.recht;
 ---
 <Textseite
   titel={`Datenschutz | ${site.name}`}
@@ -10,16 +14,101 @@ import { site } from '../site.config';
   etikett="Rechtliches"
   indexieren={false}
 >
+  <h2>Kurz gesagt</h2>
+  <p>
+    Diese Webseite kommt ohne Cookies aus. Sie speichert nichts in Ihrem Browser, wertet Ihren Besuch nicht aus und
+    lädt keine Schriften, Karten oder Skripte von fremden Anbietern. Persönliche Angaben erhalten wir erst, wenn Sie
+    uns anrufen, schreiben oder eine Nachricht über WhatsApp schicken.
+  </p>
+
   <h2>Verantwortlich</h2>
   <address>
-    {site.name}, {site.inhaberVoll}<br />
+    {site.name}<br />
+    {site.inhaberVoll}<br />
     {site.adresse.strasse}, {site.adresse.plz} {site.adresse.ort}<br />
-    <a href={`mailto:${site.email}`}>{site.email}</a>
+    Telefon: <span class="nummer">{site.telefon}</span><br />
+    E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </address>
+  <p>
+    Einen Datenschutzbeauftragten müssen wir nach dem Gesetz nicht benennen. Für Fragen zum Datenschutz erreichen
+    Sie uns unter den Angaben oben.
+  </p>
+
+  <h2>Aufruf der Webseite</h2>
+  <p>
+    Unsere Webseite liegt bei {r.hoster.name}, {r.hoster.adresse}. Mit dem Anbieter besteht ein Vertrag zur
+    Auftragsverarbeitung nach Art. 28 DSGVO.
+  </p>
+  <p>
+    Wenn Sie eine Seite aufrufen, verarbeitet der Server des Anbieters für kurze Zeit die Angaben, die Ihr Browser
+    mitschickt: Ihre IP-Adresse, Datum und Uhrzeit, die aufgerufene Seite, die Seite, von der Sie kommen, und die
+    Art von Browser und Betriebssystem. Das ist nötig, damit die Seite bei Ihnen ankommt, und dient der Sicherheit
+    und Stabilität des Servers. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren Betrieb
+    (Art. 6 Abs. 1 Buchstabe f DSGVO). Die Protokolle werden nur so lange aufbewahrt, wie es dafür nötig ist, und
+    nicht mit anderen Angaben zu Ihrer Person zusammengeführt.
+  </p>
+  <p>Die Übertragung zwischen Ihrem Gerät und unserer Webseite ist verschlüsselt (TLS).</p>
+
+  <h2>Anruf und E-Mail</h2>
+  <p>
+    Wenn Sie uns anrufen oder schreiben, verarbeiten wir die Angaben, die Sie uns mitteilen, zum Beispiel Ihren
+    Namen, Ihre Telefonnummer, Ihre Adresse und Ihr Anliegen. Wir nutzen sie, um Ihre Anfrage zu beantworten, einen
+    Besuch zu vereinbaren und unsere Leistungen für Sie zu erbringen. Rechtsgrundlage ist die Anbahnung oder
+    Erfüllung eines Vertrags (Art. 6 Abs. 1 Buchstabe b DSGVO), sonst unser berechtigtes Interesse an der
+    Beantwortung Ihrer Anfrage (Art. 6 Abs. 1 Buchstabe f DSGVO).
+  </p>
+  <p>
+    Angaben zu Ihrer Gesundheit, zum Beispiel einen Pflegegrad, verarbeiten wir nur, wenn Sie sie uns selbst
+    mitteilen, und nur, soweit wir sie für Ihre Betreuung und die Abrechnung brauchen. Grundlage ist Ihre
+    Einwilligung (Art. 9 Abs. 2 Buchstabe a DSGVO). Sie können sie jederzeit für die Zukunft widerrufen.
+  </p>
+  <p>
+    Kommt es nicht zu einem Auftrag, löschen wir Ihre Angaben, sobald Ihre Anfrage erledigt ist. Unterlagen zu
+    Aufträgen und Rechnungen bewahren wir so lange auf, wie es Handels- und Steuerrecht verlangen, in der Regel
+    sechs bis zehn Jahre.
+  </p>
+
+  <h2>WhatsApp</h2>
+  <p>
+    Auf unserer Webseite finden Sie Verweise zu WhatsApp. Erst wenn Sie einen davon antippen und uns schreiben,
+    gehen Daten an WhatsApp. Anbieter ist die WhatsApp Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland,
+    ein Unternehmen des Meta-Konzerns. WhatsApp verarbeitet dabei unter anderem Ihre Telefonnummer und Angaben zur
+    Nutzung in eigener Verantwortung, zum Teil auch in den USA. Die Nachrichten selbst sind von Gerät zu Gerät
+    verschlüsselt. Näheres steht in der Datenschutzrichtlinie von WhatsApp.
+  </p>
+  <p>
+    Rechtsgrundlage ist Ihre Einwilligung, die Sie uns geben, indem Sie uns über WhatsApp schreiben
+    (Art. 6 Abs. 1 Buchstabe a DSGVO). Sie müssen WhatsApp nicht nutzen: Telefon und E-Mail stehen Ihnen genauso
+    offen. Bitte schicken Sie uns über WhatsApp keine Angaben zu Ihrer Gesundheit. Das besprechen wir lieber am
+    Telefon oder bei Ihnen zu Hause.
+  </p>
+
+  <h2>Weitergabe Ihrer Daten</h2>
+  <p>
+    Wir geben Ihre Daten nur weiter, wenn es für Ihren Auftrag nötig ist, zum Beispiel an Ihre Pflegekasse für die
+    Abrechnung, wenn Sie das wünschen, oder wenn ein Gesetz uns dazu verpflichtet. Eine Entscheidung allein durch
+    ein Computerprogramm oder eine Auswertung Ihres Verhaltens findet nicht statt.
+  </p>
+
+  <h2>Ihre Rechte</h2>
+  <p>
+    Sie können von uns Auskunft über Ihre gespeicherten Daten verlangen (Art. 15 DSGVO), falsche Angaben berichtigen
+    lassen (Art. 16), Daten löschen lassen (Art. 17), die Verarbeitung einschränken lassen (Art. 18) und Ihre Daten
+    in einem gängigen Format erhalten (Art. 20). Eine Einwilligung können Sie jederzeit für die Zukunft widerrufen
+    (Art. 7 Abs. 3).
+  </p>
+  <p>
+    Stützt sich eine Verarbeitung auf unser berechtigtes Interesse, können Sie ihr aus Gründen widersprechen, die
+    sich aus Ihrer besonderen Lage ergeben (Art. 21 DSGVO). Dafür genügt ein Anruf oder eine E-Mail an uns.
+  </p>
+  <p>
+    Sie haben außerdem das Recht, sich bei einer Aufsichtsbehörde für den Datenschutz zu beschweren. Für uns
+    zuständig ist:
+  </p>
+  <address>
+    Der Hessische Beauftragte für Datenschutz und Informationsfreiheit<br />
+    Gustav-Stresemann-Ring 1, 65189 Wiesbaden
   </address>
 
-  <p class="platzhalter">
-    [PLATZHALTER: Datenschutzerklärung] Text einfügen und rechtlich prüfen lassen.
-    Hinweis zur Technik: Die Seite setzt keine Cookies, lädt keine Schriften oder Skripte von fremden Servern
-    und nutzt keine Analyse-Werkzeuge. Anbieter des Webhostings und dessen Server-Protokolle ergänzen.
-  </p>
+  <p>Stand: {r.stand}</p>
 </Textseite>

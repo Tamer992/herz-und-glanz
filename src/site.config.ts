@@ -9,8 +9,8 @@
 export const site = {
   // Neuer Name seit 09.10.2026 (vorher „Herz & Glanz“)
   name: 'Herz & Glanz Service',
-  // Domain laut Tamer (11.10.2026): herzundglanzservice.de. Hosting steht noch aus
-  domain: 'https://herzundglanzservice.de',
+  // Domain bei IONOS (Tamer, 11.10.2026): herzglanz-service.de. Zwischenzeitlich war herzundglanzservice.de geplant
+  domain: 'https://herzglanz-service.de',
 
   // Kurz, so sprechen die Inhaber ihre Kundschaft an
   // Seit 11.10.2026 auf Tamers Wunsch überall mit vollem Namen
@@ -40,8 +40,8 @@ export const site = {
   whatsapp2Link: '491716958218',
   // Am Computer steht sie als Text statt des WhatsApp-Knopfs
   whatsapp: '0171 7057151',
-  // E-Mail zur neuen Domain (Tamer, 11.10.2026)
-  email: 'info@herzundglanzservice.de',
+  // E-Mail zur Domain herzglanz-service.de (Tamer, 11.10.2026)
+  email: 'info@herzglanz-service.de',
 
   adresse: {
     // Vom Flyer übernommen
@@ -80,6 +80,29 @@ export const site = {
   // und auf „Über uns“. Laut Rückmeldung vom 03.10.2026 liegt sie vor. Auf false stellen, falls nicht.
   // [PLATZHALTER: Anerkennung bestätigen] Bescheid oder Registriernummer bei Hussain und Alireza erfragen
   anerkennung: true,
+
+  // Angaben für Impressum und Datenschutz (11.10.2026). Leere Felder erscheinen nicht auf der Seite.
+  recht: {
+    // [PLATZHALTER: Rechtsform bestätigen] Zwei Inhaber führen den Betrieb gemeinsam, das ist in der Regel eine GbR.
+    // Mit Hussain und Alireza klären, dann zum Beispiel 'Gesellschaft bürgerlichen Rechts (GbR)' eintragen.
+    rechtsform: '',
+    // [PLATZHALTER: Umsatzsteuer] Umsatzsteuer-Identifikationsnummer (DE…) eintragen, falls vorhanden.
+    // Bei Kleinunternehmern ohne USt-IdNr. leer lassen.
+    ustId: '',
+    // Wirtschafts-Identifikationsnummer, falls schon zugeteilt. Sonst leer lassen.
+    wirtschaftsId: '',
+    // Zuständige Behörde für die Anerkennung nach § 45a SGB XI in Hessen: der Kreisausschuss des Landkreises,
+    // in dem der Betrieb sitzt (Pflegeunterstützungsverordnung). Erscheint nur, wenn anerkennung: true.
+    // [PLATZHALTER: Behörde und Anschrift laut Anerkennungsbescheid prüfen]
+    aufsicht: { name: 'Kreisausschuss des Kreises Bergstraße', adresse: 'Gräffstraße 5, 64646 Heppenheim' },
+    // [PLATZHALTER: Betriebshaftpflicht] Name und Anschrift des Versicherers und Geltungsbereich eintragen
+    // (Pflichtangabe für Dienstleister, wenn eine Berufs- oder Betriebshaftpflicht besteht). Leer: Abschnitt entfällt.
+    haftpflicht: { name: '', adresse: '', gebiet: 'Deutschland' },
+    // Webhosting (Tamer, 11.10.2026: IONOS)
+    hoster: { name: 'IONOS SE', adresse: 'Elgendorfer Straße 57, 56410 Montabaur' },
+    // Stand der Datenschutzerklärung
+    stand: 'Oktober 2026',
+  },
 
   // [PLATZHALTER: echte Bewertungen] Nur echte Stimmen mit Einverständnis der Kundinnen und Kunden eintragen,
   // zum Beispiel aus Google. Solange die Liste leer ist, erscheint auf der Seite nichts davon.

@@ -1,7 +1,9 @@
 ---
 import Textseite from '../components/Textseite.astro';
 import { site } from '../site.config';
-// Solange hier Platzhalter stehen, nicht in Suchmaschinen aufnehmen
+// Rechtstexte bleiben aus den Suchmaschinen heraus (indexieren={false}), gefunden werden sollen die Inhaltsseiten.
+// Angaben stehen in site.config.ts unter „recht“. Leere Felder erscheinen nicht.
+const r = site.recht;
 ---
 <Textseite
   titel={`Impressum | ${site.name}`}
@@ -17,6 +19,7 @@ import { site } from '../site.config';
     {site.adresse.strasse}<br />
     {site.adresse.plz} {site.adresse.ort}
   </address>
+  {r.rechtsform && <p>Rechtsform: {r.rechtsform}. Vertretungsberechtigt sind {site.inhaberVoll}.</p>}
 
   <h2>Kontakt</h2>
   <p>
@@ -25,9 +28,50 @@ import { site } from '../site.config';
     E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
   </p>
 
-  <p class="platzhalter">
-    [PLATZHALTER: Impressum vervollständigen] Rechtsform,
-    gegebenenfalls Umsatzsteuer-Identifikationsnummer und Anerkennung als Angebot zur Unterstützung im Alltag.
-    Bitte rechtlich prüfen lassen.
+  {(r.ustId || r.wirtschaftsId) && (
+    <>
+      <h2>Steuerliche Angaben</h2>
+      <p>
+        {r.ustId && <>Umsatzsteuer-Identifikationsnummer nach § 27a Umsatzsteuergesetz: {r.ustId}<br /></>}
+        {r.wirtschaftsId && <>Wirtschafts-Identifikationsnummer: {r.wirtschaftsId}</>}
+      </p>
+    </>
+  )}
+
+  {site.anerkennung && r.aufsicht.name && (
+    <>
+      <h2>Anerkennung und zuständige Behörde</h2>
+      <p>
+        Unsere Alltagsbegleitung, Hauswirtschaft und Trauerbegleitung sind als Angebot zur Unterstützung im Alltag
+        nach § 45a SGB XI in Hessen anerkannt. Zuständige Behörde:
+      </p>
+      <address>
+        {r.aufsicht.name}<br />
+        {r.aufsicht.adresse}
+      </address>
+    </>
+  )}
+
+  {r.haftpflicht.name && (
+    <>
+      <h2>Betriebshaftpflichtversicherung</h2>
+      <address>
+        {r.haftpflicht.name}<br />
+        {r.haftpflicht.adresse}
+      </address>
+      <p>Geltungsbereich: {r.haftpflicht.gebiet}</p>
+    </>
+  )}
+
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>
+    Wir nehmen nicht an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil und sind dazu auch
+    nicht verpflichtet. Wenn etwas nicht passt, rufen Sie uns bitte an. Wir finden gemeinsam eine Lösung.
+  </p>
+
+  <h2>Inhalte dieser Webseite</h2>
+  <p>
+    Texte, Gestaltung und Logo dieser Webseite sind urheberrechtlich geschützt. Die Fotos stammen von Unsplash und
+    werden nach der dortigen Lizenz verwendet.
   </p>
 </Textseite>
