@@ -9,14 +9,15 @@
 export const site = {
   // Neuer Name seit 09.10.2026 (vorher „Herz & Glanz“)
   name: 'Herz & Glanz Service',
-  // Domain ist registriert (Tamer, 09.10.2026). Hosting steht noch aus
-  domain: 'https://herzglanz-service.de',
+  // Domain laut Tamer (11.10.2026): herzundglanzservice.de. Hosting steht noch aus
+  domain: 'https://herzundglanzservice.de',
 
   // Kurz, so sprechen die Inhaber ihre Kundschaft an
-  inhaberin: 'Hussain und Alireza',
+  // Seit 11.10.2026 auf Tamers Wunsch überall mit vollem Namen
+  inhaberin: 'Mohammad Hussain Zafari und Alireza Moradi',
   // Volle Namen für Impressum, Datenschutz und Suchmaschinen (von Tamer am 09.10.2026)
   inhaberVoll: 'Mohammad Hussain Zafari und Alireza Moradi',
-  inhaberinVorname: 'Hussain und Alireza',
+  inhaberinVorname: 'Mohammad Hussain Zafari und Alireza Moradi',
   // „Inhaberin“, „Inhaber“ oder „Inhaber“ (Mehrzahl)
   inhaberTitel: 'Inhaber',
   mehrereInhaber: true,
@@ -26,12 +27,12 @@ export const site = {
   // Ziffern mit +49, ohne 0 vorne
   telefonLink: '+491717057151',
   // Vorname, der über der Hauptnummer steht (Ansprechpartner.astro)
-  telefonName: 'Hussain',
+  telefonName: 'Mohammad Hussain Zafari',
   // Zweite Nummer: Alireza Moradi. Leer lassen, wenn es keine gibt.
   telefon2: '0171 6958218',
   telefon2Link: '+491716958218',
   // Vorname, der vor der zweiten Nummer steht
-  telefon2Name: 'Alireza',
+  telefon2Name: 'Alireza Moradi',
   // Beide Nummern haben WhatsApp (Tamer, 09.10.2026). Hauptnummer für Knöpfe und Anrufleiste: Hussain.
   // Ziffern mit 49 vorne, ohne + und ohne 0
   whatsappLink: '491717057151',
@@ -39,8 +40,8 @@ export const site = {
   whatsapp2Link: '491716958218',
   // Am Computer steht sie als Text statt des WhatsApp-Knopfs
   whatsapp: '0171 7057151',
-  // Von Tamer am 09.10.2026
-  email: 'info@herzglanz-service.de',
+  // E-Mail zur neuen Domain (Tamer, 11.10.2026)
+  email: 'info@herzundglanzservice.de',
 
   adresse: {
     // Vom Flyer übernommen
@@ -58,11 +59,11 @@ export const site = {
   // und das Einsatzgebiet in den Suchmaschinen-Daten weg.
   einsatzorte: [] as string[],
 
-  // Erreichbarkeit, so steht es auf der Seite: rund um die Uhr, Montag bis Sonntag (Tamer, 09.10.2026)
-  erreichbarkeit: 'Montag bis Sonntag, 24 Stunden',
-  erreichbarkeitKurz: 'Mo bis So, 24 Stunden',
-  // Dieselben Zeiten für Suchmaschinen. Tage: Mo Tu We Th Fr Sa Su (00:00 bis 23:59 heißt bei Google „rund um die Uhr“)
-  oeffnungszeiten: [{ tage: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'], von: '00:00', bis: '23:59' }],
+  // Erreichbarkeit, so steht es auf der Seite: täglich 6 bis 22 Uhr (Tamer, 11.10.2026, vorher 24 Stunden)
+  erreichbarkeit: 'Montag bis Sonntag, 6 bis 22 Uhr',
+  erreichbarkeitKurz: 'Mo bis So, 6 bis 22 Uhr',
+  // Dieselben Zeiten für Suchmaschinen. Tage: Mo Tu We Th Fr Sa Su
+  oeffnungszeiten: [{ tage: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'], von: '06:00', bis: '22:00' }],
 
   // Abrechnung über die Pflegekasse (Entlastungsbetrag nach § 45b SGB XI) für Alltagsbegleitung,
   // Hauswirtschaft und Trauerbegleitung. Laut Hussain und Alireza möglich (03.10.2026).
