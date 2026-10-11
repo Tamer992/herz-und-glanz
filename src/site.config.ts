@@ -105,7 +105,7 @@ export const leistungen = [
     pfad: '/alltagsbegleitung/',
     anker: 'alltagsbegleitung',
     kasse: true,
-    punkte: ['Betreuung', 'Demenz', 'Spaziergänge', 'Gespräche', 'Arztbegleitung', 'Rezepte und Medikamente'],
+    punkte: ['Betreuung', 'Kinder', 'Demenz', 'Spaziergänge', 'Gespräche', 'Arztbegleitung', 'Rezepte und Medikamente'],
   },
   {
     titel: 'Hauswirtschaft',
