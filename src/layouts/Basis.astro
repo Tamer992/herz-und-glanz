@@ -3,7 +3,7 @@ import { p } from '../pfad';
 import schriftText from '../fonts/atkinson-next.woff2?url';
 import schriftTitel from '../fonts/literata.woff2?url';
 import '../styles/global.css';
-import { site, leistungen, leistungsPfad } from '../site.config';
+import { site, leistungen, leistungsPfad, einsatzgebietDaten } from '../site.config';
 import Kopf from '../components/Kopf.astro';
 import Fuss from '../components/Fuss.astro';
 import Anrufleiste from '../components/Anrufleiste.astro';
@@ -13,8 +13,10 @@ interface Props {
   beschreibung: string;
   ruhig?: boolean;
   indexieren?: boolean;
+  // false für Seiten ohne eigene Adresse (404): dann kein canonical und keine og:url
+  kanonisch?: boolean;
 }
-const { titel, beschreibung, ruhig = false } = Astro.props;
+const { titel, beschreibung, ruhig = false, kanonisch = true } = Astro.props;
 // In der Vorschau (GitHub Pages) nie in Suchmaschinen aufnehmen
 const vorschau = import.meta.env.PUBLIC_VORSCHAU === '1';
 const indexieren = (Astro.props.indexieren ?? true) && !vorschau;
@@ -62,8 +64,9 @@ const betrieb = {
     addressLocality: site.adresse.ort,
     addressCountry: site.adresse.land,
   },
-  // Ohne Einsatzorte kein Einsatzgebiet in den Suchmaschinen-Daten
-  ...(site.einsatzorte.length > 0 && { areaServed: site.einsatzorte.map((ort) => ({ '@type': 'City', name: ort })) }),
+  geo: { '@type': 'GeoCoordinates', latitude: site.lage.breite, longitude: site.lage.laenge },
+  areaServed: einsatzgebietDaten(),
+  ...(site.profile.length > 0 && { sameAs: site.profile }),
   openingHoursSpecification: site.oeffnungszeiten.map((z) => ({
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: z.tage.map((t) => `https://schema.org/${tage[t as keyof typeof tage]}`),
@@ -75,7 +78,7 @@ const betrieb = {
     name: 'Leistungen',
     itemListElement: leistungen.map((l) => ({
       '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: l.titel, url: new URL(leistungsPfad(l), site.domain).href },
+      itemOffered: { '@type': 'Service', '@id': `${new URL(leistungsPfad(l), site.domain).href}#leistung`, name: l.titel, url: new URL(leistungsPfad(l), site.domain).href },
     })),
   },
 };
@@ -88,7 +91,7 @@ const betrieb = {
     {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={csp} />}
     <title>{titel}</title>
     <meta name="description" content={beschreibung} />
-    <link rel="canonical" href={adresse} />
+    {kanonisch && <link rel="canonical" href={adresse} />}
     {!indexieren && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#122519" />
 
@@ -104,7 +107,7 @@ const betrieb = {
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={titel} />
     <meta property="og:description" content={beschreibung} />
-    <meta property="og:url" content={adresse} />
+    {kanonisch && <meta property="og:url" content={adresse} />}
     <meta property="og:image" content={vorschaubild} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

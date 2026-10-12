@@ -1,7 +1,7 @@
 ---
 import Textseite from '../components/Textseite.astro';
 import { site } from '../site.config';
-// Rechtstexte bleiben aus den Suchmaschinen heraus (indexieren={false}), gefunden werden sollen die Inhaltsseiten.
+// Das Impressum ist seit 12.10.2026 für Suchmaschinen freigegeben: Es belegt Name, Anschrift und Telefon des Betriebs.
 // Angaben stehen in site.config.ts unter „recht“. Leere Felder erscheinen nicht.
 const r = site.recht;
 ---
@@ -10,7 +10,6 @@ const r = site.recht;
   beschreibung={`Impressum von ${site.name}, ${site.adresse.ort}.`}
   ueberschrift="Impressum"
   etikett="Rechtliches"
-  indexieren={false}
 >
   <h2>Angaben gemäß § 5 DDG</h2>
   <address>

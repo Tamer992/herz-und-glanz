@@ -20,12 +20,17 @@ const fragen = [
     antwort:
       'Wir schauen uns Ihren Garten an und besprechen, was Ihnen wichtig ist. Danach erhalten Sie ein klares Angebot.',
   },
+  {
+    frage: 'Kommen Sie auch nur zum Rasenmähen?',
+    antwort:
+      'Ja. Sie sagen uns, was Sie brauchen, auch wenn es nur der Rasen ist oder das Laub im Herbst.',
+  },
   ...(site.pflegekasse
     ? [
         {
-          frage: 'Geht das auch über die Pflegekasse?',
+          frage: 'Kann ich Gartenarbeit über die Pflegekasse abrechnen?',
           antwort:
-            'Die Gartenpflege vereinbaren wir direkt mit Ihnen. Über die Pflegekasse sind bei uns Alltagsbegleitung, Hauswirtschaft und Trauerbegleitung möglich.',
+            'Die Gartenpflege vereinbaren wir direkt mit Ihnen. Der Entlastungsbetrag ist in Hessen für Hilfe im Haushalt und im Alltag gedacht, die Pflege von Außenanlagen gehört nicht dazu. Über die Pflegekasse sind bei uns Alltagsbegleitung, Hauswirtschaft und Trauerbegleitung möglich.',
           link: { text: 'Mehr zur Pflegekasse', pfad: '/pflegekasse/' },
         },
       ]
@@ -62,5 +67,6 @@ const fragen = [
     titel: 'Ihr Angebot nach einem Blick in den Garten.',
     text: 'Wir kommen vorbei, schauen uns Ihren Garten an und machen Ihnen ein klares Angebot. Regelmäßig oder einmalig, ganz wie Sie möchten.',
   }}
+  kurz={`${site.name} pflegt Gärten und Außenanlagen: Rasen mähen, Beete jäten, Laub zusammenrechen und mitnehmen. Wir kommen ${site.einsatzImSatz}, das ganze Jahr im festen Rhythmus oder einmalig. Nach einem Blick in Ihren Garten erhalten Sie Ihr Angebot. Die Gartenpflege vereinbaren wir direkt mit Ihnen.`}
   fragen={fragen}
 />

@@ -30,13 +30,18 @@ const fragen = [
             'Ja. Mit einem Pflegegrad setzen Sie dafür Ihren monatlichen Entlastungsbetrag ein. Wie die Abrechnung läuft, besprechen wir gern mit Ihnen.',
           link: { text: 'So funktioniert es mit der Pflegekasse', pfad: '/pflegekasse/' },
         },
+        {
+          frage: 'Bekomme ich mit Pflegegrad 1 eine Haushaltshilfe?',
+          antwort:
+            `Ja. Schon mit Pflegegrad 1 steht Ihnen der Entlastungsbetrag von bis zu ${site.entlastungsbetrag} Euro im Monat zu. Den setzen Sie für unsere Hauswirtschaft ein.`,
+        },
       ]
     : []),
 ];
 ---
 <Leistungsseite
   anker="hauswirtschaft"
-  titel={`Hauswirtschaft und Haushaltshilfe in ${site.ort} | ${site.name}`}
+  titel={`Haushaltshilfe und Hauswirtschaft in ${site.ort} | ${site.name}`}
   beschreibung={`Haushaltshilfe für Senioren in ${site.ort} und Umgebung: putzen, waschen, bügeln, kochen, einkaufen und Fenster putzen. Mit Pflegegrad über die Pflegekasse.`}
   ueberschrift="Ein Zuhause, in dem Sie sich wohlfühlen."
   einleitung="Wir putzen, waschen und bügeln, kochen für Sie und bringen den Einkauf mit. Sie behalten den Überblick, wir packen an."
@@ -62,5 +67,6 @@ const fragen = [
     bild: fotoMitte,
     alt: 'Hände legen frisch gewaschene Wäsche zu ordentlichen Stapeln zusammen',
   }}
+  kurz={`${site.name} hilft älteren Menschen und Familien im Haushalt: putzen, waschen und bügeln, kochen, einkaufen. Wir kommen an festen Tagen zu Ihnen, ${site.einsatzImSatz}. Beim ersten Besuch sprechen wir ab, was wir übernehmen und wie oft.` + (site.pflegekasse ? ` Mit Pflegegrad setzen Sie dafür den Entlastungsbetrag ein, bis zu ${site.entlastungsbetrag} Euro im Monat.` : '')}
   fragen={fragen}
 />

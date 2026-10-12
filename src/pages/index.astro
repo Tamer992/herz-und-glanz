@@ -88,14 +88,14 @@ const groessen = [
 
 ---
 <Basis
-  titel={`Alltagsbegleitung, Hauswirtschaft und Reinigung in ${site.ort} | ${site.name}`}
-  beschreibung={`${site.name} in ${site.ort}: Alltagsbegleitung und Betreuung, Trauerbegleitung, Hauswirtschaft, Gebäudereinigung und Gartenpflege. Für Senioren, Familien und Betriebe.`}
+  titel={`Alltagshilfe und Haushaltshilfe in ${site.ort} | ${site.name}`}
+  beschreibung={`${site.name} in ${site.ort}: Alltagsbegleitung, Haushaltshilfe, Trauerbegleitung, Gebäudereinigung und Gartenpflege. Für Senioren, Familien und Betriebe.`}
 >
   {/* Einstieg */}
   <section class="einstieg" aria-labelledby="einstieg-titel">
     <div class="behaelter einstieg__raster">
       <div class="einstieg__text">
-        {site.einsatzorte.length > 0 && <p class="etikett">{site.einsatzorte.join(', ')}</p>}
+        {site.einsatzorte.length > 0 && <p class="etikett">{site.einsatzKurz}</p>}
         <h1 id="einstieg-titel"><span class="einstieg__zeile">Alltag. Zuhause.</span> <span class="einstieg__zeile einstieg__zeile--gruen">Sauber. Gepflegt.</span></h1>
         <p class="einleitung">
           Wir begleiten Sie zum Arzt, helfen im Haushalt, putzen und machen den Garten.
@@ -312,7 +312,7 @@ const groessen = [
           <p>
             {/* [ERGÄNZEN: Abrechnung offen, ob Herz & Glanz direkt mit der Pflegekasse abrechnet. Bis zur Klärung neutral formuliert. Frühere Fassung: „Mit Pflegegrad regeln wir Alltagsbegleitung, Hauswirtschaft und Trauerbegleitung direkt mit Ihrer Pflegekasse, über Ihren monatlichen Entlastungsbetrag.“] */}
             Mit Pflegegrad setzen Sie für Alltagsbegleitung, Hauswirtschaft und Trauerbegleitung Ihren monatlichen
-            Entlastungsbetrag ein.
+            Entlastungsbetrag ein. <a href={p('/pflegekasse/')}>So funktioniert es mit der Pflegekasse</a>
           </p>
         )}
       </div>
@@ -354,7 +354,7 @@ const groessen = [
           {site.einsatzorte.length > 0 && (
             <div>
               <dt>Unterwegs in</dt>
-              <dd>{site.einsatzorte.join(', ')}</dd>
+              <dd>{site.einsatzKurz}. {site.einsatzZusatz}.</dd>
             </div>
           )}
           <div>

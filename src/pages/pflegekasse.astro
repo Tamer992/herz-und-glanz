@@ -81,7 +81,36 @@ const fragen = [
     frage: 'Kann ich Beträge aus dem letzten Jahr noch nutzen?',
     antwort:
       'Ja. Was Sie im vergangenen Jahr nicht genutzt haben, können Sie bis zum 30. Juni einsetzen. Wie viel das bei Ihnen ist, sagt Ihnen Ihre Pflegekasse.',
+  },  {
+    frage: 'Wie bekomme ich den Entlastungsbetrag?',
+    antwort:
+      `Die Pflegekasse erstattet den Betrag gegen die Rechnung eines anerkannten Angebots, bis zu ${betrag} Euro im Monat. Einen eigenen Antrag brauchen Sie dafür nicht, der Anspruch besteht mit Ihrem Pflegegrad.`,
   },
+  {
+    frage: 'Wofür kann ich den Entlastungsbetrag einsetzen?',
+    antwort:
+      'Für anerkannte Angebote zur Unterstützung im Alltag wie unsere Alltagsbegleitung und Hauswirtschaft. Außerdem für Tages- und Nachtpflege, Kurzzeitpflege und bestimmte Leistungen eines Pflegedienstes.',
+  },
+  {
+    frage: 'Kann ich zusätzlich Pflegesachleistungen umwandeln?',
+    antwort:
+      'Ja, ab Pflegegrad 2. Bis zu 40 Prozent der Pflegesachleistungen, die Sie nicht für einen Pflegedienst brauchen, können Sie für anerkannte Angebote wie unseres einsetzen (§ 45a Abs. 4 SGB XI). Das gilt zusätzlich zum Entlastungsbetrag, Ihre Pflegekasse nennt Ihnen den Betrag.',
+  },
+  {
+    frage: 'Wer berät mich im Kreis Bergstraße?',
+    antwort:
+      'Der Pflegestützpunkt des Kreises Bergstraße mit Standorten in Heppenheim und Mörlenbach berät Sie zu allen Fragen rund um Pflege und Pflegegrad. Auch Ihre Pflegekasse hilft Ihnen weiter. Und natürlich können Sie uns anrufen.',
+  },
+  ...(site.anerkennung
+    ? [
+        {
+          frage: 'Sind Sie ein anerkanntes Angebot?',
+          antwort:
+            `Ja. ${site.name} ist in Hessen als Angebot zur Unterstützung im Alltag nach § 45a SGB XI anerkannt. Deshalb können Sie den Entlastungsbetrag bei uns einsetzen.`,
+          link: { text: 'Mehr über uns', pfad: '/ueber-uns/' },
+        },
+      ]
+    : []),
 ];
 
 const daten = {
@@ -94,8 +123,8 @@ const daten = {
 };
 ---
 <Basis
-  titel={`Pflegekasse und Entlastungsbetrag: so einfach geht es | ${site.name}`}
-  beschreibung={`Mit Pflegegrad den Entlastungsbetrag für Alltagsbegleitung, Hauswirtschaft und Trauerbegleitung einsetzen. ${site.name} in ${site.ort} und Umgebung.`}
+  titel={`Entlastungsbetrag und Pflegekasse in ${site.ort} | ${site.name}`}
+  beschreibung={`Mit Pflegegrad stehen Ihnen bis zu ${betrag} Euro im Monat zu. Den Entlastungsbetrag setzen Sie für Alltagsbegleitung, Hauswirtschaft und Trauerbegleitung ein.`}
 >
   <Fragment slot="kopf"><script type="application/ld+json" set:html={JSON.stringify(daten)} /></Fragment>
 
@@ -132,7 +161,7 @@ const daten = {
       <div class="ablauf__kopf" data-einblenden>
         <p class="etikett">So einfach geht es</p>
         <h2 id="ablauf-titel">Vom ersten Anruf bis zur Abrechnung</h2>
-        <p class="leise">Sie erzählen uns, was Sie sich wünschen. Alles Weitere regeln wir mit Ihrer Pflegekasse.</p>
+        <p class="leise">Sie erzählen uns, was Sie sich wünschen. Alles Weitere klären wir gemeinsam.</p>
       </div>
       <ol class="schritte linien-liste">
         {schritte.map((s) => (
@@ -162,6 +191,7 @@ const daten = {
           </li>
         ))}
       </ul>
+      <p class="leise fakten__stand">Stand {site.entlastungStand}, Grundlage ist § 45b SGB XI.</p>
     </div>
   </section>
 
@@ -207,6 +237,10 @@ const daten = {
 </Basis>
 
 <style>
+  .fakten__stand {
+    margin: var(--a-4) 0 0;
+    font-size: var(--text-klein);
+  }
   /* Kopf: Tannenfläche als große Karte mit runden Ecken */
   .kassenkopf {
     padding-block: var(--a-2) var(--a-bereich);

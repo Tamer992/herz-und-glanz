@@ -54,10 +54,30 @@ export const site = {
   // Hauptort für Überschriften und Seitentitel
   ort: 'Heppenheim',
 
-  // Einsatzorte, ein Eintrag je Ort. Auf Tamers Wunsch (09.10.2026) leer: „Heppenheim und Umgebung“ steht nicht mehr
-  // auf der Seite. Solange die Liste leer ist, fallen Etikett im Einstieg, „Unterwegs in“ (Fuß, Kontakt, Steckbriefe)
-  // und das Einsatzgebiet in den Suchmaschinen-Daten weg.
-  einsatzorte: [] as string[],
+  // Lage der Betriebsadresse für Suchmaschinen (Breite, Länge). Quelle: OpenStreetMap, Vogelsbergstraße 2,
+  // abgefragt am 12.10.2026. Bei einem Umzug anpassen.
+  lage: { breite: 49.6434, laenge: 8.613 },
+
+  // Öffentliche Profile des Betriebs (Google-Unternehmensprofil, Bing Places, Verzeichnisse), ein Link je Eintrag.
+  // Erscheinen nur in den Suchmaschinen-Daten (sameAs). [PLATZHALTER: Profile eintragen, sobald sie angelegt sind]
+  profile: [] as string[],
+
+  // Einsatzgebiet (Tamer, 12.10.2026): Heppenheim und 50 km im Umkreis, weiter entfernt nach Absprache.
+  // einsatzorte: ein Eintrag je Zeile unter „Unterwegs in“ (Fuß, Kontakt). Ist die Liste leer, fallen Etikett im
+  // Einstieg, „Unterwegs in“ (Fuß, Kontakt, Steckbriefe) und der Umkreis in den Suchmaschinen-Daten weg.
+  einsatzorte: ['Heppenheim und bis 50 km im Umkreis', 'Weiter weg? Fragen Sie uns einfach.'] as string[],
+  // Dasselbe in einer Zeile: Etikett im Einstieg der Startseite und Steckbriefe
+  // Zwischen „50“ und „km“ steht ein festes Leerzeichen (U+00A0), damit die Angabe nicht auseinanderbricht
+  einsatzKurz: 'Heppenheim und 50 km Umkreis',
+  einsatzZusatz: 'Weiter weg? Fragen Sie uns einfach',
+  // So steht das Einsatzgebiet mitten in einem Satz (Kurzantwort auf den Leistungsseiten)
+  einsatzImSatz: 'in Heppenheim und bis 50 km im Umkreis',
+  // Einige Orte im Umkreis beim Namen (Tamer, 12.10.2026), weil mit Ortsnamen gesucht wird. Stehen als ein Satz auf
+  // der Kontaktseite („Zum Beispiel in …“) und in den Suchmaschinen-Daten. Bewusst kurz halten, keine lange Liste.
+  // Die vollständige Liste gehört ins Google-Unternehmensprofil.
+  einsatzBeispiele: ['Bensheim', 'Lorsch', 'Laudenbach', 'Hemsbach', 'Weinheim', 'Lautertal', 'Fürth im Odenwald'] as string[],
+  // Umkreis um die Betriebsadresse in Kilometern, für die Suchmaschinen-Daten. 0: kein Umkreis.
+  einsatzradiusKm: 50,
 
   // Erreichbarkeit, so steht es auf der Seite: täglich 6 bis 22 Uhr (Tamer, 11.10.2026, vorher 24 Stunden)
   erreichbarkeit: 'Montag bis Sonntag, 6 bis 22 Uhr',
@@ -112,6 +132,10 @@ export const site = {
   // Entlastungsbetrag nach § 45b SGB XI in Euro pro Monat (seit 1.1.2025, gilt auch 2026).
   // Steht auf der Seite „Pflegekasse“. Bei einer gesetzlichen Erhöhung hier anpassen.
   entlastungsbetrag: 131,
+  // Wann die Angaben zum Entlastungsbetrag zuletzt an der offiziellen Quelle geprüft wurden (§ 45b SGB XI,
+  // gesetze-im-internet.de). Steht auf der Seite „Pflegekasse“. Zum Jahreswechsel 2026/27 neu prüfen: Das
+  // Pflegeneuordnungsgesetz (Kabinettsbeschluss 30.09.2026) soll den Entlastungsbetrag ab 2027 ersetzen.
+  entlastungStand: 'Oktober 2026',
 
   // Gibt es eigene Unterseiten für die Leistungen, „Pflegekasse“, „Über uns“ und „Kontakt“?
   // Bei false zeigen Navigation, Kacheln und Fuß auf die Abschnitte der Startseite.
@@ -164,6 +188,29 @@ export const leistungen = [
     punkte: ['Rasenpflege', 'Unkraut entfernen', 'Laub entfernen', 'Beetpflege', 'Außenanlagen'],
   },
 ];
+
+// Einsatzgebiet für die Suchmaschinen-Daten (areaServed): der Hauptort und, wenn angegeben, der Umkreis um die
+// Betriebsadresse. Steht so auch sichtbar auf der Seite („Unterwegs in“).
+export function einsatzgebietDaten() {
+  return [
+    { '@type': 'City', name: site.ort },
+    ...(site.einsatzorte.length > 0 ? site.einsatzBeispiele.map((ort) => ({ '@type': 'City', name: ort })) : []),
+    ...(site.einsatzorte.length > 0 && site.einsatzradiusKm > 0
+      ? [
+          {
+            '@type': 'GeoCircle',
+            geoMidpoint: { '@type': 'GeoCoordinates', latitude: site.lage.breite, longitude: site.lage.laenge },
+            geoRadius: site.einsatzradiusKm * 1000,
+          },
+        ]
+      : []),
+  ];
+}
+
+// Aufzählung als Satzteil: „A, B und C“
+export function aufzaehlung(teile: string[]): string {
+  return teile.length < 2 ? teile.join('') : `${teile.slice(0, -1).join(', ')} und ${teile[teile.length - 1]}`;
+}
 
 // Ziel eines Links auf eine Leistung: Unterseite oder Kachel auf der Startseite
 export function leistungsPfad(l: { pfad: string; anker: string }): string {

@@ -13,20 +13,32 @@ import Krumen from './Krumen.astro';
 interface Props {
   wege: { titel: string; pfad: string }[];
   etikett: string;
+  // Etikett gehört mit zur Hauptüberschrift (h1), sieht aber aus wie bisher. Für Seiten, deren Etikett
+  // Leistung und Ort nennt: so steht beides in der h1, ohne dass sich die große Zeile ändert (SEO, 12.10.2026).
+  etikettImTitel?: boolean;
   ueberschrift: string;
   einleitung: string;
   bild: ImageMetadata;
   alt: string;
   ausschnitt?: 'mitte' | 'ganz-oben' | 'oben' | 'unten' | 'links' | 'rechts';
 }
-const { wege, etikett, ueberschrift, einleitung, bild, alt, ausschnitt = 'mitte' } = Astro.props;
+const { wege, etikett, etikettImTitel = false, ueberschrift, einleitung, bild, alt, ausschnitt = 'mitte' } = Astro.props;
 ---
 <Krumen wege={wege} />
 <section class="seitenkopf" aria-labelledby="seitenkopf-titel">
   <div class="behaelter seitenkopf__raster">
     <div class="seitenkopf__text">
-      <p class="etikett">{etikett}</p>
-      <h1 id="seitenkopf-titel">{ueberschrift}</h1>
+      {etikettImTitel ? (
+        <h1 id="seitenkopf-titel" class="seitenkopf__titel">
+          <span class="etikett">{etikett}</span>{" "}
+          <span class="seitenkopf__zeile">{ueberschrift}</span>
+        </h1>
+      ) : (
+        <>
+          <p class="etikett">{etikett}</p>
+          <h1 id="seitenkopf-titel">{ueberschrift}</h1>
+        </>
+      )}
       <p class="einleitung">{einleitung}</p>
       <slot name="zusatz" />
       <div class="seitenkopf__handeln">
@@ -63,10 +75,28 @@ const { wege, etikett, ueberschrift, einleitung, bild, alt, ausschnitt = 'mitte'
     display: grid;
     gap: var(--a-6);
   }
-  .seitenkopf h1 {
+  .seitenkopf h1:not(.seitenkopf__titel),
+  .seitenkopf__zeile {
     max-width: 14ch;
     margin-bottom: var(--a-4);
     font-size: clamp(2.6rem, 1.7rem + 3.6vw, 4.75rem);
+  }
+  /* h1 aus Etikett und großer Zeile: die h1 selbst ist nur die Klammer, die Zeile trägt die Überschriften-Schrift */
+  .seitenkopf h1.seitenkopf__titel {
+    max-width: none;
+    margin: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    text-wrap: wrap;
+  }
+  .seitenkopf__zeile {
+    display: block;
+    font-family: var(--schrift-titel);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+    color: var(--tinte);
   }
   .seitenkopf .einleitung {
     max-width: 36ch;

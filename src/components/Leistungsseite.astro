@@ -12,7 +12,7 @@ import Dach from './Dach.astro';
 import Symbol from './Symbol.astro';
 import MitPfeil from './MitPfeil.astro';
 import Ansprechpartner from './Ansprechpartner.astro';
-import { site, leistungen } from '../site.config';
+import { site, leistungen, einsatzgebietDaten } from '../site.config';
 import { leistungsbilder } from '../leistungsbilder';
 
 type Ausschnitt = 'mitte' | 'ganz-oben' | 'oben' | 'unten' | 'links' | 'rechts';
@@ -26,6 +26,9 @@ interface Props {
   alt: string;
   ausschnitt?: Ausschnitt;
   aufgabenTitel: string;
+  // Kurzantwort in drei, vier Sätzen: wer, was, wo, für wen, wie es losgeht. Steht offen auf der Seite (nicht
+  // eingeklappt), damit Suchmaschinen und KI-Suchen die Kernaussage direkt finden (SEO, 12.10.2026).
+  kurz?: string;
   aufgaben: { titel: string; text: string }[];
   mitte: { titel: string; absaetze: string[]; bild: ImageMetadata; alt: string; ausschnitt?: Ausschnitt };
   // Für Leistungen ohne Pflegekasse: Text des Bands in Tanne
@@ -33,7 +36,7 @@ interface Props {
   fragen: Frage[];
   ruhig?: boolean;
 }
-const { anker, titel, beschreibung, ueberschrift, einleitung, bild, alt, ausschnitt, aufgabenTitel, aufgaben, mitte, band, fragen, ruhig = false } =
+const { anker, titel, beschreibung, ueberschrift, einleitung, bild, alt, ausschnitt, aufgabenTitel, kurz, aufgaben, mitte, band, fragen, ruhig = false } =
   Astro.props;
 
 const leistung = leistungen.find((l) => l.anker === anker)!;
@@ -43,13 +46,13 @@ const andere = leistungen.filter((l) => l.anker !== anker);
 const dienst = {
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': `${new URL(leistung.pfad, site.domain).href}#leistung`,
   name: leistung.titel,
   serviceType: leistung.titel,
   description: beschreibung,
   url: new URL(leistung.pfad, site.domain).href,
   provider: { '@id': `${site.domain}/#betrieb` },
-  // Ohne Einsatzorte kein Einsatzgebiet in den Suchmaschinen-Daten
-  ...(site.einsatzorte.length > 0 && { areaServed: site.einsatzorte.map((ort) => ({ '@type': 'City', name: ort })) }),
+  areaServed: einsatzgebietDaten(),
 };
 ---
 <Basis titel={titel} beschreibung={beschreibung} ruhig={ruhig}>
@@ -60,7 +63,8 @@ const dienst = {
       { titel: 'Leistungen', pfad: '/#leistungen' },
       { titel: leistung.kurz, pfad: leistung.pfad },
     ]}
-    etikett={leistung.titel}
+    etikett={`${leistung.titel} in ${site.ort}`}
+    etikettImTitel
     ueberschrift={ueberschrift}
     einleitung={einleitung}
     bild={bild}
@@ -76,6 +80,7 @@ const dienst = {
       <div class="aufgaben__kopf" data-einblenden>
         <p class="etikett">Im Einzelnen</p>
         <h2 id="aufgaben-titel">{aufgabenTitel}</h2>
+        {kurz && <p class="leise aufgaben__kurz">{kurz}</p>}
       </div>
       <ul class="aufgaben__liste">
         {aufgaben.map((a, i) => (
@@ -199,6 +204,10 @@ const dienst = {
   .aufgaben__kopf h2 {
     max-width: 13ch;
     margin: 0;
+  }
+  .aufgaben__kurz {
+    max-width: 38ch;
+    margin: var(--a-3) 0 0;
   }
   .aufgaben__liste {
     list-style: none;

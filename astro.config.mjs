@@ -17,8 +17,10 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // Impressum und Datenschutz sind mit noindex markiert, solange dort Platzhalter stehen
-      filter: (seite) => !/\/(impressum|datenschutz)\/$/.test(seite),
+      // Die Datenschutzerklärung ist mit noindex markiert und fehlt deshalb in der Sitemap
+      filter: (seite) => !/\/datenschutz\/$/.test(seite),
+      // Änderungsdatum = Tag des Bauens, damit Suchmaschinen neue Stände erkennen
+      serialize: (eintrag) => ({ ...eintrag, lastmod: new Date().toISOString().slice(0, 10) }),
     }),
   ],
   devToolbar: { enabled: false },

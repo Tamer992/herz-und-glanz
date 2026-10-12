@@ -35,8 +35,8 @@ const werte = [
 ];
 ---
 <Basis
-  titel={`Über uns: ${site.inhaberin} | ${site.name} in ${site.ort}`}
-  beschreibung={`${site.name} aus ${site.ort}: ${site.inhaberin} unterstützen ältere Menschen und ihre Familien im Alltag, im Haushalt und im Garten.`}
+  titel={`Über uns | ${site.name} in ${site.ort}`}
+  beschreibung={`${site.inhaberin} von ${site.name} in ${site.ort} unterstützen Senioren und Familien im Alltag, im Haushalt und im Garten.`}
 >
   <Seitenkopf
     wege={[{ titel: 'Über uns', pfad: '/ueber-uns/' }]}
@@ -100,7 +100,7 @@ const werte = [
           {site.einsatzorte.length > 0 && (
             <div>
               <dt>Unterwegs in</dt>
-              <dd>{site.einsatzorte.join(', ')}</dd>
+              <dd>{site.einsatzKurz}. {site.einsatzZusatz}.</dd>
             </div>
           )}
           <div>

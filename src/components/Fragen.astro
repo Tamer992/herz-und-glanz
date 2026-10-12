@@ -17,7 +17,19 @@ interface Props {
   klasse?: string;
 }
 const { fragen, titel = 'Gut zu wissen', klasse } = Astro.props;
+
+// Dieselben Fragen und Antworten für Suchmaschinen und KI-Suchen (FAQPage). Entsteht aus den sichtbaren Texten.
+const daten = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: fragen.map((f) => ({
+    '@type': 'Question',
+    name: f.frage,
+    acceptedAnswer: { '@type': 'Answer', text: f.antwort },
+  })),
+};
 ---
+<script type="application/ld+json" set:html={JSON.stringify(daten)} />
 <section class:list={['bereich', 'fragen', klasse]} aria-labelledby="fragen-titel">
   <div class="behaelter fragen__raster">
     <div class="fragen__kopf" data-einblenden>

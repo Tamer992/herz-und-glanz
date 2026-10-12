@@ -20,6 +20,11 @@ const fragen = [
     antwort:
       'Wir schauen uns die Räume an und besprechen mit Ihnen, was wann gereinigt werden soll. Danach erhalten Sie ein klares Angebot.',
   },
+  {
+    frage: 'Kommen Sie auch zum Putzen in Privathaushalte?',
+    antwort:
+      'Ja. Wir reinigen Wohnungen und Häuser regelmäßig, in dem Rhythmus, den Sie sich wünschen. Feste Tage machen wir beim ersten Besuch aus.',
+  },
   ...(site.pflegekasse
     ? [
         {
@@ -35,7 +40,7 @@ const fragen = [
 ---
 <Leistungsseite
   anker="gebaeudereinigung"
-  titel={`Gebäudereinigung in ${site.ort}: Wohnung, Haus, Büro, Treppenhaus | ${site.name}`}
+  titel={`Gebäudereinigung und Putzhilfe in ${site.ort} | ${site.name}`}
   beschreibung={`Gebäudereinigung in ${site.ort} und Umgebung: Wohnungen, Häuser, Büros und Treppenhäuser. Regelmäßig oder als gründliche Grundreinigung.`}
   ueberschrift="Sauberkeit, auf die Sie sich verlassen können."
   einleitung={`Wir reinigen Wohnungen, Häuser, Büros und Treppenhäuser. Regelmäßig nach festem Plan oder einmal ganz gründlich.`}
@@ -63,5 +68,6 @@ const fragen = [
     titel: 'Ihr Angebot nach einem kurzen Besuch.',
     text: 'Wir kommen vorbei, schauen uns Räume und Wünsche an und machen Ihnen ein klares Angebot. Regelmäßig oder einmalig, ganz wie Sie möchten.',
   }}
+  kurz={`${site.name} reinigt Wohnungen, Häuser, Büros und Treppenhäuser, regelmäßig nach Plan oder einmal gründlich. Wir arbeiten für Privathaushalte, Hausgemeinschaften und Betriebe ${site.einsatzImSatz}. Wir schauen uns die Räume an, danach erhalten Sie Ihr Angebot. Die Reinigung vereinbaren wir direkt mit Ihnen.`}
   fragen={fragen}
 />

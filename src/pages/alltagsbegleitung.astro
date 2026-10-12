@@ -25,6 +25,11 @@ const fragen = [
     antwort:
       'Sehr gern. Ihre Kinder können auch per Telefon dazukommen. Auf Wunsch geben wir ihnen nach jedem Besuch kurz Bescheid.',
   },
+  {
+    frage: 'Begleiten Sie auch Menschen mit Demenz?',
+    antwort:
+      'Ja. Wir kommen mit Geduld, festen Abläufen und immer demselben vertrauten Gesicht. Die Beschäftigung knüpft an das an, was der Mensch kennt und gern tut.',
+  },
   ...(site.pflegekasse
     ? [
         {
@@ -34,6 +39,11 @@ const fragen = [
             'Ja. Mit einem Pflegegrad setzen Sie dafür Ihren monatlichen Entlastungsbetrag ein. Wie die Abrechnung läuft, besprechen wir gern mit Ihnen.',
           link: { text: 'So funktioniert es mit der Pflegekasse', pfad: '/pflegekasse/' },
         },
+        {
+          frage: 'Ab welchem Pflegegrad kann ich den Entlastungsbetrag nutzen?',
+          antwort:
+            `Schon ab Pflegegrad 1. Der Entlastungsbetrag von bis zu ${site.entlastungsbetrag} Euro im Monat steht allen zu, die einen Pflegegrad haben und zu Hause leben (§ 45b SGB XI).`,
+        },
       ]
     : []),
 ];
@@ -41,7 +51,7 @@ const fragen = [
 <Leistungsseite
   anker="alltagsbegleitung"
   titel={`Alltagsbegleitung und Betreuung in ${site.ort} | ${site.name}`}
-  beschreibung={`Begleitung und Betreuung im Alltag, auch bei Demenz: Spaziergänge, Gespräche, Begleitung zum Arzt, Rezepte, Post und Behördengänge. Für Erwachsene und Kinder in ${site.ort} und Umgebung, mit Pflegegrad über die Pflegekasse.`}
+  beschreibung={`Alltagsbegleitung in ${site.ort} für Erwachsene und Kinder: Spaziergänge, Gespräche, Arztbegleitung, auch bei Demenz. Mit Pflegegrad über die Pflegekasse.`}
   ueberschrift="Jemand, der mitgeht."
   einleitung="Wir begleiten und unterstützen Menschen im Alltag, Erwachsene wie Kinder, auch Menschen mit Demenz. Wir gehen mit Ihnen spazieren, einkaufen oder zum Arzt, trinken Kaffee und spielen Karten. Ganz so, wie es Ihnen Freude macht."
   bild={fotoKopf}
@@ -72,5 +82,6 @@ const fragen = [
     alt: 'Eine Begleiterin und eine ältere Dame sitzen nah beieinander und lachen',
     ausschnitt: 'rechts',
   }}
+  kurz={`${site.name} begleitet Erwachsene und Kinder im Alltag, auch Menschen mit Demenz: beim Spaziergang, beim Einkauf und auf dem Weg zum Arzt. Wir kommen zu Ihnen nach Hause, ${site.einsatzImSatz}. Nach Ihrem Anruf besuchen wir Sie und besprechen, was Sie sich wünschen.` + (site.pflegekasse ? ` Mit Pflegegrad setzen Sie dafür den Entlastungsbetrag ein, bis zu ${site.entlastungsbetrag} Euro im Monat.` : '')}
   fragen={fragen}
 />
