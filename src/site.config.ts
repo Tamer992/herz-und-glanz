@@ -9,6 +9,8 @@
 export const site = {
   // Neuer Name seit 09.10.2026 (vorher „Herz & Glanz“)
   name: 'Herz & Glanz Service',
+  // Kurz, für große Überschriften („Wir sind Herz & Glanz.“). Feste Leerzeichen (U+00A0) halten den Namen zusammen.
+  nameKurz: 'Herz & Glanz',
   // Domain bei IONOS (Tamer, 11.10.2026): herzglanz-service.de. Zwischenzeitlich war herzundglanzservice.de geplant
   domain: 'https://herzglanz-service.de',
 

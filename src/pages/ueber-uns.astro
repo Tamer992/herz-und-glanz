@@ -33,6 +33,9 @@ const werte = [
     text: 'Was wir bei Ihnen zu Hause sehen und hören, bleibt bei uns. Darauf können Sie und Ihre Familie sich verlassen.',
   },
 ];
+
+// Die Inhaber einzeln, für die Namenszeile im Kopf
+const inhaber = site.inhaberin.split(' und ');
 ---
 <Basis
   titel={`Über uns | ${site.name} in ${site.ort}`}
@@ -41,12 +44,19 @@ const werte = [
   <Seitenkopf
     wege={[{ titel: 'Über uns', pfad: '/ueber-uns/' }]}
     etikett="Über uns"
-    ueberschrift={`Wir sind ${site.inhaberin}.`}
+    ueberschrift={`Wir sind ${site.nameKurz}.`}
     einleitung={`${site.name} ist ein Betrieb aus ${site.ort}. Wir unterstützen ältere Menschen und ihre Familien im Alltag, im Haushalt und im Garten, mit Herz und mit Zeit.`}
     bild={fotoKopf}
     alt="Eine jüngere Hand liegt auf der Hand einer älteren Person"
     ausschnitt="mitte"
   >
+    {/* Die vollen Namen als eigene, ruhige Zeile unter der Überschrift: In der großen Überschrift waren sie zu lang
+         und fielen im Umbruch auseinander (Tamer, 12.10.2026) */}
+    <div slot="unter-titel" class="inhaber-rahmen">
+      <ul class="inhaber" aria-label={site.inhaberTitel}>
+        {inhaber.map((name) => <li>{name}</li>)}
+      </ul>
+    </div>
     {site.pflegekasse && site.anerkennung && <Siegel slot="zusatz" />}
   </Seitenkopf>
   {/* [ERGÄNZEN: zwei, drei Sätze zu Hussain und Alireza: was sie vorher gemacht haben und warum sie Herz & Glanz gegründet haben] */}
@@ -150,6 +160,40 @@ const werte = [
 </Basis>
 
 <style>
+  /* Namen der Inhaber unter der Überschrift: nebeneinander mit feiner Linie, bei wenig Platz untereinander.
+     Nach verfügbarem Platz (Container), wie bei den Ansprechpartnern im Fuß. */
+  .inhaber-rahmen {
+    container-type: inline-size;
+    margin-bottom: var(--a-4);
+  }
+  .inhaber {
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    font-family: var(--schrift-titel);
+    font-size: clamp(1.25rem, 1.05rem + 1vw, 1.75rem);
+    font-weight: 560;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--tinte);
+  }
+  .inhaber li {
+    white-space: nowrap;
+  }
+  @container (min-width: 34rem) {
+    .inhaber {
+      grid-template-columns: repeat(2, max-content);
+      gap: 0;
+    }
+    .inhaber li + li {
+      margin-left: var(--a-3);
+      padding-left: var(--a-3);
+      border-left: 1px solid var(--messing);
+    }
+  }
   /* Werte */
   .werte__raster {
     display: grid;
