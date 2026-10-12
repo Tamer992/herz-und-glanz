@@ -70,11 +70,14 @@ export const site = {
   einsatzorte: ['Heppenheim und bis 50 km im Umkreis', 'Weiter weg? Fragen Sie uns einfach.'] as string[],
   // Dasselbe in einer Zeile: Etikett im Einstieg der Startseite und Steckbriefe
   // Zwischen „50“ und „km“ steht ein festes Leerzeichen (U+00A0), damit die Angabe nicht auseinanderbricht
-  einsatzKurz: 'Heppenheim und 50 km Umkreis',
+  einsatzKurz: 'Heppenheim und bis 50 km im Umkreis',
   einsatzZusatz: 'Weiter weg? Fragen Sie uns einfach',
   // Etikett über der Hauptüberschrift der Startseite. Ohne Kilometerangabe: „50 KM“ sah dort in Versalien nicht
   // gut aus (Tamer, 12.10.2026). Die 50 km stehen im Fuß, auf der Kontaktseite und in den Steckbriefen.
   einsatzEtikett: 'Heppenheim und Umkreis',
+  // Zusatz im Etikett der Leistungsseiten, hinter dem Namen der Leistung („Gartenpflege in Heppenheim und im Umkreis“).
+  // Gehört dort zur h1 (Tamer, 12.10.2026: nicht nur „in Heppenheim“).
+  einsatzNachLeistung: 'in Heppenheim und im Umkreis',
   // So steht das Einsatzgebiet mitten in einem Satz (Kurzantwort auf den Leistungsseiten)
   einsatzImSatz: 'in Heppenheim und bis 50 km im Umkreis',
   // Einige Orte im Umkreis beim Namen (Tamer, 12.10.2026), weil mit Ortsnamen gesucht wird. Stehen als ein Satz auf
